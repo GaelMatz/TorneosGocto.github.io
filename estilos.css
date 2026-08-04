@@ -1,0 +1,27 @@
+body{
+    margin:0;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+header{
+    background:linear-gradient(135deg,#5b00ff,#8a00ff,#d000ff);
+    text-align:center;
+    padding:80px 20px;
+    box-shadow:0 0 30px #8a00ff;
+}
+
+header h1{
+    font-family:'Orbitron', sans-serif;
+    font-size:60px;
+    text-transform:uppercase;
+    text-shadow:
+        0 0 10px white,
+        0 0 20px #c000ff,
+        0 0 40px #c000ff;
+}
+
+header p{
+    font-size:22px;
+}
