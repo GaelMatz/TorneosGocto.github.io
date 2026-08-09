@@ -242,7 +242,17 @@ button:disabled{
     background:#b100ff;
 }
 
-.precio{
-    text-align:center;
-    font-size:20px;
+.aviso-pago{
+    background:#0d0d0d;
+    border:1px solid #8a00ff;
+    border-radius:10px;
+    padding:15px;
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+.aviso-pago p{
+    margin:8px 0;
+    font-size:15px;
+}
 }
