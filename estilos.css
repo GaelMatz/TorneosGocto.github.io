@@ -75,6 +75,7 @@ section p{
     text-align:center;
     box-shadow:0 0 20px rgba(138,0,255,.4);
     transition:transform .3s, box-shadow .3s;
+    padding-bottom:25px;
 }
 
 .juego:hover{
@@ -91,11 +92,30 @@ section p{
 
 .juego h3{
     color:#d896ff;
-    margin:18px 15px;
+    font-size:22px;
+    margin:12px 10px 20px;
 }
 
 .juego p{
-    margin:10px 15px;
+    font-size:18px;
+    margin:12px 10px;
+}
+
+.juego button{
+    margin-top:15px;
+    background:#8a00ff;
+    color:white;
+    border:none;
+    padding:12px 30px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+}
+
+.juego button:hover{
+    background:#b100ff;
+    transform:scale(1.05);
 }
 
 /* ==========================
