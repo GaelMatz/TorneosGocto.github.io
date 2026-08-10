@@ -4,24 +4,53 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Registro - Torneos GR</title>
 
-    <!-- Fuente -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ==========================================
+         FUENTE
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
         rel="stylesheet"
     >
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="estilos.css">
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- ==========================================
+         CSS
+    =========================================== -->
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+
+    <!-- ==========================================
+         SUPABASE
+    =========================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
 
 </head>
 
@@ -29,13 +58,15 @@
 <body>
 
 
-    <!-- ==========================
+    <!-- ==========================================
          ENCABEZADO
-    =========================== -->
+    =========================================== -->
 
     <header>
 
-        <h1>Registro al torneo</h1>
+        <h1>
+            Registro al torneo
+        </h1>
 
         <p id="nombre-torneo">
             Cargando torneo...
@@ -44,15 +75,18 @@
     </header>
 
 
-    <!-- ==========================
+
+    <!-- ==========================================
          FORMULARIO
-    =========================== -->
+    =========================================== -->
 
     <main>
 
         <section class="registro">
 
-            <h2>Datos del participante</h2>
+            <h2>
+                Datos del participante
+            </h2>
 
 
             <form id="formulario-registro">
@@ -114,7 +148,7 @@
                 >
 
 
-                <!-- CONTACTO -->
+                <!-- OTRO CONTACTO -->
 
                 <label for="contacto">
                     Otro medio de contacto
@@ -127,9 +161,13 @@
                 >
 
 
-                <!-- INFORMACIÓN DE PAGO -->
+                <!-- ==================================
+                     PAGO
+                =================================== -->
 
-                <h2>Información de pago</h2>
+                <h2>
+                    Información de pago
+                </h2>
 
 
                 <div class="aviso-pago">
@@ -139,15 +177,16 @@
                     </p>
 
                     <p>
-                        Una vez que envíes tu registro, me pondré
-                        en contacto contigo mediante los datos
-                        proporcionados para confirmar tu participación
+                        Una vez que envíes tu registro,
+                        me pondré en contacto contigo
+                        mediante los datos proporcionados
+                        para confirmar tu participación
                         y acordar el método de pago.
                     </p>
 
                     <p>
-                        Tu lugar será confirmado una vez realizado
-                        el pago correspondiente.
+                        Tu lugar será confirmado una vez
+                        realizado el pago correspondiente.
                     </p>
 
                 </div>
@@ -167,22 +206,32 @@
     </main>
 
 
-    <!-- ==========================
+
+    <!-- ==========================================
          JAVASCRIPT
-    =========================== -->
+    =========================================== -->
 
     <script>
 
 
+        console.log(
+            "JavaScript de registro cargado correctamente"
+        );
+
+
         // ==========================================
-        // CONEXIÓN CON SUPABASE
+        // SUPABASE
         // ==========================================
 
         const SUPABASE_URL =
-            https://oeffdxriewmpzeqverbz.supabase.co/rest/v1/;
+            "https://oeffdxriewmpzeqverbz.supabase.co";
+
+
+        // IMPORTANTE:
+        // Pega aquí tu NUEVA anon/public key
 
         const SUPABASE_ANON_KEY =
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lZmZkeHJpZXdtcHplcXZlcmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMDY2NDEsImV4cCI6MjEwMTg4MjY0MX0.XRGLm7qRAEd8FgX5f3K1KBVSKtIhmFpZLtUwN_XbbOI;
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lZmZkeHJpZXdtcHplcXZlcmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMDY2NDEsImV4cCI6MjEwMTg4MjY0MX0.XRGLm7qRAEd8FgX5f3K1KBVSKtIhmFpZLtUwN_XbbOI";
 
 
         const supabaseClient =
@@ -192,8 +241,13 @@
             );
 
 
+        console.log(
+            "Supabase inicializado correctamente"
+        );
+
+
         // ==========================================
-        // OBTENER EL TORNEO DE LA URL
+        // OBTENER TORNEO DE LA URL
         // ==========================================
 
         const parametros =
@@ -207,7 +261,7 @@
 
 
         // ==========================================
-        // NOMBRES DE LOS TORNEOS
+        // NOMBRES DE TORNEOS
         // ==========================================
 
         const nombresTorneos = {
@@ -226,7 +280,7 @@
 
 
         // ==========================================
-        // MOSTRAR EL TORNEO
+        // MOSTRAR TORNEO
         // ==========================================
 
         const elementoTorneo =
@@ -263,9 +317,12 @@
             async function(event) {
 
 
-                // Evita que la página se recargue
-
                 event.preventDefault();
+
+
+                console.log(
+                    "Formulario enviado"
+                );
 
 
                 // ==================================
@@ -320,6 +377,12 @@
                 };
 
 
+                console.log(
+                    "Datos preparados:",
+                    datos
+                );
+
+
                 // ==================================
                 // ENVIAR A SUPABASE
                 // ==================================
@@ -330,47 +393,40 @@
                         .insert([datos])
                         .select();
 
-                console.log("Resultado:", data);
-                console.log("Error:", error);
+
+                // ==================================
+                // MOSTRAR RESULTADO
+                // ==================================
+
+                console.log(
+                    "Resultado:",
+                    data
+                );
+
+                console.log(
+                    "Error:",
+                    error
+                );
+
+
+                // ==================================
+                // ERROR
+                // ==================================
 
                 if (error) {
+
                     alert(
                         "ERROR DE SUPABASE:\n\n" +
                         error.message
                     );
 
                     return;
-                }
-
-                alert(
-                    "¡Registro enviado correctamente!"
-                );
-
-
-                // ==================================
-                // COMPROBAR ERROR
-                // ==================================
-
-                if (error) {
-
-                    console.error(
-                        "Error de Supabase:",
-                        error
-                    );
-
-                    alert(
-                        "Hubo un problema al enviar " +
-                        "tu registro.\n\n" +
-                        "Por favor, inténtalo nuevamente."
-                    );
-
-                    return;
 
                 }
 
 
                 // ==================================
-                // REGISTRO EXITOSO
+                // ÉXITO
                 // ==================================
 
                 alert(
