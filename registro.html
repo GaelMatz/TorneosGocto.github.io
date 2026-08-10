@@ -387,11 +387,34 @@
                 // ENVIAR A SUPABASE
                 // ==================================
 
-                const { data, error } =
+                const { error } =
                     await supabaseClient
                         .from("inscripciones")
-                        .insert([datos])
-                        .select();
+                        .insert([datos]);
+
+                console.log("Error:", error);
+
+                if (error) {
+
+                    alert(
+                        "ERROR DE SUPABASE:\n\n" +
+                        error.message
+                    );
+
+                    return;
+
+                }
+
+                alert(
+                    "¡Registro enviado correctamente!\n\n" +
+                    "Torneo: " +
+                    nombreTorneo +
+                    "\n\n" +
+                    "Me pondré en contacto contigo para confirmar " +
+                    "tu participación y acordar el método de pago."
+                );
+
+                formulario.reset();
 
 
                 // ==================================
