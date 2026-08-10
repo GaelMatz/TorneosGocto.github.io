@@ -324,10 +324,27 @@
                 // ENVIAR A SUPABASE
                 // ==================================
 
-                const { error } =
+                const { data, error } =
                     await supabaseClient
                         .from("inscripciones")
-                        .insert([datos]);
+                        .insert([datos])
+                        .select();
+
+                console.log("Resultado:", data);
+                console.log("Error:", error);
+
+                if (error) {
+                    alert(
+                        "ERROR DE SUPABASE:\n\n" +
+                        error.message
+                    );
+
+                    return;
+                }
+
+                alert(
+                    "¡Registro enviado correctamente!"
+                );
 
 
                 // ==================================
