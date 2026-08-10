@@ -2,26 +2,51 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Registro - Torneos GR</title>
 
+    <!-- Fuente -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
+        rel="stylesheet"
+    >
 
+    <!-- CSS -->
     <link rel="stylesheet" href="estilos.css">
+
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
 
 <body>
 
+
+    <!-- ==========================
+         ENCABEZADO
+    =========================== -->
+
     <header>
+
         <h1>Registro al torneo</h1>
-        <p>Super Smash Bros. Ultimate</p>
+
+        <p id="nombre-torneo">
+            Cargando torneo...
+        </p>
+
     </header>
+
+
+    <!-- ==========================
+         FORMULARIO
+    =========================== -->
 
     <main>
 
@@ -29,82 +54,331 @@
 
             <h2>Datos del participante</h2>
 
-            <form>
 
-                <label for="nombre">Nombre completo</label>
-                <input 
-                    type="text" 
-                    id="nombre" 
-                    name="nombre"
+            <form id="formulario-registro">
+
+
+                <!-- NOMBRE -->
+
+                <label for="nombre">
+                    Nombre completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
                     placeholder="Escribe tu nombre"
                     required
                 >
 
-                <label for="nickname">Nickname / Gamertag</label>
-                <input 
-                    type="text" 
-                    id="nickname" 
-                    name="nickname"
+
+                <!-- NICKNAME -->
+
+                <label for="nickname">
+                    Nickname / Gamertag
+                </label>
+
+                <input
+                    type="text"
+                    id="nickname"
                     placeholder="Tu nombre dentro del juego"
                     required
                 >
 
-                <label for="discord">Discord</label>
-                <input 
-                    type="text" 
-                    id="discord" 
-                    name="discord"
+
+                <!-- DISCORD -->
+
+                <label for="discord">
+                    Discord
+                </label>
+
+                <input
+                    type="text"
+                    id="discord"
                     placeholder="Ejemplo: usuario123"
                     required
                 >
 
-                <label for="correo">Correo electrónico</label>
-                <input 
-                    type="email" 
-                    id="correo" 
-                    name="correo"
+
+                <!-- CORREO -->
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
                     placeholder="tucorreo@ejemplo.com"
                     required
                 >
 
-                <label for="contacto">Otro medio de contacto</label>
-                <input 
-                    type="text" 
-                    id="contacto" 
-                    name="contacto"
+
+                <!-- CONTACTO -->
+
+                <label for="contacto">
+                    Otro medio de contacto
+                </label>
+
+                <input
+                    type="text"
+                    id="contacto"
                     placeholder="Opcional"
                 >
 
+
+                <!-- INFORMACIÓN DE PAGO -->
+
                 <h2>Información de pago</h2>
+
 
                 <div class="aviso-pago">
 
-                <p>
-                    <strong>Importante:</strong>
-                </p>
+                    <p>
+                        <strong>Importante:</strong>
+                    </p>
 
-                <p>
-                    Una vez que envíes tu registro, me pondré en contacto contigo
-                    mediante los datos proporcionados para confirmar tu participación
-                    y acordar el método de pago.
-                </p>
+                    <p>
+                        Una vez que envíes tu registro, me pondré
+                        en contacto contigo mediante los datos
+                        proporcionados para confirmar tu participación
+                        y acordar el método de pago.
+                    </p>
 
-                <p>
-                    Tu lugar en el torneo será confirmado una vez que se haya
-                    realizado el pago correspondiente.
-                </p>
+                    <p>
+                        Tu lugar será confirmado una vez realizado
+                        el pago correspondiente.
+                    </p>
 
-            </div>
+                </div>
 
-            <button type="submit">
-                Enviar registro
-            </button>
+
+                <!-- BOTÓN -->
+
+                <button type="submit">
+                    Enviar registro
+                </button>
+
 
             </form>
 
         </section>
 
     </main>
+
+
+    <!-- ==========================
+         JAVASCRIPT
+    =========================== -->
+
+    <script>
+
+
+        // ==========================================
+        // CONEXIÓN CON SUPABASE
+        // ==========================================
+
+        const SUPABASE_URL =
+            https://oeffdxriewmpzeqverbz.supabase.co/rest/v1/;
+
+        const SUPABASE_ANON_KEY =
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lZmZkeHJpZXdtcHplcXZlcmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMDY2NDEsImV4cCI6MjEwMTg4MjY0MX0.XRGLm7qRAEd8FgX5f3K1KBVSKtIhmFpZLtUwN_XbbOI;
+
+
+        const supabaseClient =
+            supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
+
+
+        // ==========================================
+        // OBTENER EL TORNEO DE LA URL
+        // ==========================================
+
+        const parametros =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        const torneo =
+            parametros.get("torneo");
+
+
+        // ==========================================
+        // NOMBRES DE LOS TORNEOS
+        // ==========================================
+
+        const nombresTorneos = {
+
+            smash:
+                "Super Smash Bros. Ultimate",
+
+            pokemon:
+                "Pokémon Champions"
+
+        };
+
+
+        const nombreTorneo =
+            nombresTorneos[torneo];
+
+
+        // ==========================================
+        // MOSTRAR EL TORNEO
+        // ==========================================
+
+        const elementoTorneo =
+            document.getElementById(
+                "nombre-torneo"
+            );
+
+
+        if (nombreTorneo) {
+
+            elementoTorneo.textContent =
+                nombreTorneo;
+
+        } else {
+
+            elementoTorneo.textContent =
+                "Torneo no encontrado";
+
+        }
+
+
+        // ==========================================
+        // FORMULARIO
+        // ==========================================
+
+        const formulario =
+            document.getElementById(
+                "formulario-registro"
+            );
+
+
+        formulario.addEventListener(
+            "submit",
+            async function(event) {
+
+
+                // Evita que la página se recargue
+
+                event.preventDefault();
+
+
+                // ==================================
+                // COMPROBAR TORNEO
+                // ==================================
+
+                if (!nombreTorneo) {
+
+                    alert(
+                        "No se pudo identificar el torneo."
+                    );
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // OBTENER DATOS
+                // ==================================
+
+                const datos = {
+
+                    nombre:
+                        document.getElementById(
+                            "nombre"
+                        ).value.trim(),
+
+                    nickname:
+                        document.getElementById(
+                            "nickname"
+                        ).value.trim(),
+
+                    discord:
+                        document.getElementById(
+                            "discord"
+                        ).value.trim(),
+
+                    correo:
+                        document.getElementById(
+                            "correo"
+                        ).value.trim(),
+
+                    contacto:
+                        document.getElementById(
+                            "contacto"
+                        ).value.trim(),
+
+                    torneo:
+                        nombreTorneo
+
+                };
+
+
+                // ==================================
+                // ENVIAR A SUPABASE
+                // ==================================
+
+                const { error } =
+                    await supabaseClient
+                        .from("inscripciones")
+                        .insert([datos]);
+
+
+                // ==================================
+                // COMPROBAR ERROR
+                // ==================================
+
+                if (error) {
+
+                    console.error(
+                        "Error de Supabase:",
+                        error
+                    );
+
+                    alert(
+                        "Hubo un problema al enviar " +
+                        "tu registro.\n\n" +
+                        "Por favor, inténtalo nuevamente."
+                    );
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // REGISTRO EXITOSO
+                // ==================================
+
+                alert(
+                    "¡Registro enviado correctamente!\n\n" +
+
+                    "Torneo: " +
+                    nombreTorneo +
+
+                    "\n\n" +
+
+                    "Me pondré en contacto contigo " +
+                    "para confirmar tu participación " +
+                    "y acordar el método de pago."
+                );
+
+
+                // Limpiar formulario
+
+                formulario.reset();
+
+            }
+        );
+
+    </script>
+
 
 </body>
 
