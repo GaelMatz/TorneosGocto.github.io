@@ -10,7 +10,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Torneos GR</title>
 </head>
-  
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    // ==========================================
+    // CONEXIÓN CON SUPABASE
+    // ==========================================
+
+    const SUPABASE_URL =
+        "https://oeffdxriewmpzeqverbz.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9lZmZkeHJpZXdtcHplcXZlcmJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMDY2NDEsImV4cCI6MjEwMTg4MjY0MX0.XRGLm7qRAEd8FgX5f3K1KBVSKtIhmFpZLtUwN_XbbOI";
+
+
+    const supabaseClient =
+        supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+
+    // ==========================================
+    // CONFIGURACIÓN
+    // ==========================================
+
+    const MAX_CUPOS = 16;
+
+
+    // ==========================================
+    // ACTUALIZAR CUPOS
+    // ==========================================
+
+    async function actualizarCupos(
+        nombreTorneo,
+        elementoCupos,
+        elementoBoton,
+        elementoEnlace
+    ) {
+
+        const { data, error } =
+            await supabaseClient
+                .rpc(
+                    "obtener_cupos",
+                    {
+                        torneo_nombre: nombreTorneo
+                    }
+                );
+
+
+        console.log(
+            "Torneo consultado:",
+            nombreTorneo
+        );
+
+        console.log(
+            "Datos recibidos:",
+            data
+        );
+
+        console.log(
+            "Error recibido:",
+            error
+        );
+
+
+        // ======================================
+        // ERROR
+        // ======================================
+
+        if (error) {
+
+            console.error(
+                "Error obteniendo cupos:",
+                error
+            );
+
+            elementoCupos.textContent =
+                "No disponible";
+
+            elementoBoton.textContent =
+                "No disponible";
+
+            elementoBoton.disabled =
+                true;
+
+            return;
+        }
+
+
+        // ======================================
+        // CUPOS OCUPADOS
+        // ======================================
+
+        const ocupados =
+            Number(data);
+
+
+        // ======================================
+        // MOSTRAR CUPOS
+        // ======================================
+
+        if (ocupados >= MAX_CUPOS) {
+
+            elementoCupos.textContent =
+                `Lleno (${MAX_CUPOS} de ${MAX_CUPOS})`;
+
+            elementoBoton.textContent =
+                "No disponible";
+
+            elementoBoton.disabled =
+                true;
+
+            elementoEnlace.removeAttribute(
+                "href"
+            );
+
+            return;
+        }
+
+
+        elementoCupos.textContent =
+            `${ocupados} de ${MAX_CUPOS}`;
+
+
+        // ======================================
+        // TORNEO DISPONIBLE
+        // ======================================
+
+        elementoBoton.textContent =
+            "Registrarme";
+
+        elementoBoton.disabled =
+            false;
+
+    }
+
+
+    // ==========================================
+    // SMASH
+    // ==========================================
+
+    const cuposSmash =
+        document.getElementById(
+            "cupos-smash"
+        );
+
+    const botonSmash =
+        document.getElementById(
+            "btn-smash"
+        );
+
+    const enlaceSmash =
+        document.getElementById(
+            "boton-smash"
+        );
+
+
+    // ==========================================
+    // POKÉMON
+    // ==========================================
+
+    const cuposPokemon =
+        document.getElementById(
+            "cupos-pokemon"
+        );
+
+    const botonPokemon =
+        document.getElementById(
+            "btn-pokemon"
+        );
+
+    const enlacePokemon =
+        document.getElementById(
+            "boton-pokemon"
+        );
+
+
+    // ==========================================
+    // CONSULTAR SUPABASE
+    // ==========================================
+
+    actualizarCupos(
+        "Super Smash Bros. Ultimate",
+        cuposSmash,
+        botonSmash,
+        enlaceSmash
+    );
+
+
+    actualizarCupos(
+        "Pokémon Champions",
+        cuposPokemon,
+        botonPokemon,
+        enlacePokemon
+    );
+
+</script>
+
 <body>
 
     <header>
@@ -115,8 +314,6 @@
             </button>
         </a>
 
-    </div>
-    
     </div>
 
 </section>
