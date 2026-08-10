@@ -438,13 +438,24 @@
 
                 if (error) {
 
-                    alert(
-                        "ERROR DE SUPABASE:\n\n" +
-                        error.message
-                    );
+                    if (error.code === "23505") {
+
+                        alert(
+                            "Ya estás registrado en este torneo.\n\n" +
+                            "El correo electrónico que proporcionaste " +
+                            "ya tiene una inscripción para este torneo."
+                        );
+
+                    } else {
+
+                        alert(
+                            "ERROR DE SUPABASE:\n\n" +
+                            error.message
+                        );
+
+                    }
 
                     return;
-
                 }
 
 
