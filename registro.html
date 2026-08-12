@@ -91,21 +91,6 @@
 
             <form id="formulario-registro">
 
-
-                <!-- NOMBRE -->
-
-                <label for="nombre">
-                    Nombre completo
-                </label>
-
-                <input
-                    type="text"
-                    id="nombre"
-                    placeholder="Escribe tu nombre"
-                    required
-                >
-
-
                 <!-- NICKNAME -->
 
                 <label for="nickname">
@@ -123,7 +108,7 @@
                 <!-- DISCORD -->
 
                 <label for="discord">
-                    Discord
+                    Discord o numero de whatsapp
                 </label>
 
                 <input
@@ -145,19 +130,6 @@
                     id="correo"
                     placeholder="tucorreo@ejemplo.com"
                     required
-                >
-
-
-                <!-- OTRO CONTACTO -->
-
-                <label for="contacto">
-                    Otro medio de contacto
-                </label>
-
-                <input
-                    type="text"
-                    id="contacto"
-                    placeholder="Opcional"
                 >
 
 
@@ -345,12 +317,7 @@
                 // ==================================
 
                 const datos = {
-
-                    nombre:
-                        document.getElementById(
-                            "nombre"
-                        ).value.trim(),
-
+                    
                     nickname:
                         document.getElementById(
                             "nickname"
@@ -364,11 +331,6 @@
                     correo:
                         document.getElementById(
                             "correo"
-                        ).value.trim(),
-
-                    contacto:
-                        document.getElementById(
-                            "contacto"
                         ).value.trim(),
 
                     torneo:
